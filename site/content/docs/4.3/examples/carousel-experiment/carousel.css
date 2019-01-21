@@ -1,0 +1,64 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  color: #5a5a5a;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+  .carousel-show-three .carousel-item-next,
+  .carousel-show-three .carousel-item-prev,
+  .carousel-show-three .carousel-item.active {
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .carousel-show-three .carousel-item-next.carousel-item-left,
+  .carousel-show-three .carousel-item-prev.carousel-item-right {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+
+  @supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {
+    .carousel-show-three .carousel-item-next.carousel-item-left,
+    .carousel-show-three .carousel-item-prev.carousel-item-right {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .carousel-show-three .carousel-item-next,
+  .carousel-show-three .active.carousel-item-right {
+    -webkit-transform: translateX(33.333333%);
+    transform: translateX(33.333333%);
+  }
+
+  @supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {
+    .carousel-show-three .carousel-item-next,
+    .carousel-show-three .active.carousel-item-right {
+      -webkit-transform: translate3d(33.333333%, 0, 0);
+      transform: translate3d(33.333333%, 0, 0);
+    }
+  }
+
+  .carousel-show-three .carousel-item-prev,
+  .carousel-show-three .active.carousel-item-left {
+    -webkit-transform: translateX(-33.333333%);
+    transform: translateX(-33.333333%);
+  }
+
+  @supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {
+    .carousel-show-three .carousel-item-prev,
+    .carousel-show-three .active.carousel-item-left {
+      -webkit-transform: translate3d(-33.333333%, 0, 0);
+      transform: translate3d(-33.333333%, 0, 0);
+    }
+  }
+}
