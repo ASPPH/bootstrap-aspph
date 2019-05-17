@@ -11,8 +11,16 @@
   opacity: 0;
   @include border-radius($toast-border-radius);
 
-  &:not(:last-child) {
+  &.top-center:not(:last-child),
+  &.top-left:not(:last-child),
+  &.top-right:not(:last-child) {
     margin-bottom: $toast-padding-x;
+  }
+
+  &.bottom-center:not(:last-child),
+  &.bottom-left:not(:last-child),
+  &.bottom-right:not(:last-child) {
+    margin-top: $toast-padding-x;
   }
 
   &.showing {
@@ -22,10 +30,6 @@
   &.show {
     display: block;
     opacity: 1;
-  }
-
-  &.hide {
-    display: none;
   }
 }
 

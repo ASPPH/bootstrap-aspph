@@ -29,7 +29,7 @@ To encourage extensible and predictable toasts, we recommend a header and body. 
 Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your "toasted" content and strongly encourage a dismiss button.
 
 {{< example class="bg-light" >}}
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-header">
     {{< placeholder width="20" height="20" background="#007aff" class="rounded mr-2" text="false" title="false" >}}
     <strong class="mr-auto">Bootstrap</strong>
@@ -49,7 +49,7 @@ Toasts are as flexible as you need and have very little required markup. At a mi
 Toasts are slightly translucent, too, so they blend over whatever they might appear over. For browsers that support the `backdrop-filter` CSS property, we'll also attempt to blur the elements under a toast.
 
 {{< example class="bg-dark" >}}
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-header">
     {{< placeholder width="20" height="20" background="#007aff" class="rounded mr-2" text="false" title="false" >}}
     <strong class="mr-auto">Bootstrap</strong>
@@ -69,7 +69,7 @@ Toasts are slightly translucent, too, so they blend over whatever they might app
 When you have multiple toasts, we default to vertically stacking them in a readable manner.
 
 {{< example class="bg-light" >}}
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="toast top-left fade show" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-header">
     {{< placeholder width="20" height="20" background="#007aff" class="rounded mr-2" text="false" title="false" >}}
     <strong class="mr-auto">Bootstrap</strong>
@@ -83,7 +83,7 @@ When you have multiple toasts, we default to vertically stacking them in a reada
   </div>
 </div>
 
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="toast top-left fade show" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-header">
     {{< placeholder width="20" height="20" background="#007aff" class="rounded mr-2" text="false" title="false" >}}
     <strong class="mr-auto">Bootstrap</strong>
@@ -100,11 +100,24 @@ When you have multiple toasts, we default to vertically stacking them in a reada
 
 ## Placement
 
-Place toasts with custom CSS as you need them. The top right is often used for notifications, as is the top middle. If you're only ever going to show one toast at a time, put the positioning styles right on the `.toast`.
+Our toast are dynamically placed according to the position you specified and to their container. The top right is often used for notifications, as is the top middle. If you're only ever going to show one toast at a time.
 
-{{< example class="bg-dark" >}}
-<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-  <div class="toast" style="position: absolute; top: 0; right: 0;">
+{{< example >}}
+<form>
+  <div class="form-group">
+    <label for="selectToastPlacement">Toast placement</label>
+    <select class="form-control" id="selectToastPlacement">
+      <option value="top-center">Top center</option>
+      <option value="top-left">Top left</option>
+      <option value="top-right">Top right</option>
+      <option value="bottom-center">Bottom center</option>
+      <option value="bottom-left">Bottom left</option>
+      <option value="bottom-right">Bottom right</option>
+    </select>
+  </div>
+</form>
+<div aria-live="polite" aria-atomic="true" class="bg-dark" style="position: relative; min-height: 500px;">
+  <div class="toast toast-placement" data-delay="2000">
     <div class="toast-header">
       {{< placeholder width="20" height="20" background="#007aff" class="rounded mr-2" text="false" title="false" >}}
       <strong class="mr-auto">Bootstrap</strong>
@@ -117,56 +130,7 @@ Place toasts with custom CSS as you need them. The top right is often used for n
       Hello, world! This is a toast message.
     </div>
   </div>
-</div>
-{{< /example >}}
-
-For systems that generate more notifications, consider using a wrapping element so they can easily stack.
-
-{{< example class="bg-dark" >}}
-<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-  <!-- Position it -->
-  <div style="position: absolute; top: 0; right: 0;">
-
-    <!-- Then put toasts within -->
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        {{< placeholder width="20" height="20" background="#007aff" class="rounded mr-2" text="false" title="false" >}}
-        <strong class="mr-auto">Bootstrap</strong>
-        <small class="text-muted">just now</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">
-        See? Just like this.
-      </div>
-    </div>
-
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        {{< placeholder width="20" height="20" background="#007aff" class="rounded mr-2" text="false" title="false" >}}
-        <strong class="mr-auto">Bootstrap</strong>
-        <small class="text-muted">2 seconds ago</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">
-        Heads up, toasts will stack automatically
-      </div>
-    </div>
-  </div>
-</div>
-{{< /example >}}
-
-You can also get fancy with flexbox utilities to align toasts horizontally and/or vertically.
-
-{{< example class="bg-dark" >}}
-<!-- Flexbox container for aligning the toasts -->
-<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
-
-  <!-- Then put toasts within -->
-  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast toast-placement" data-delay="3000">
     <div class="toast-header">
       {{< placeholder width="20" height="20" background="#007aff" class="rounded mr-2" text="false" title="false" >}}
       <strong class="mr-auto">Bootstrap</strong>
@@ -201,7 +165,7 @@ As the content you're displaying changes, be sure to update the [`delay` timeout
 When using `autohide: false`, you must add a close button to allow users to dismiss the toast.
 
 {{< example class="bg-light" >}}
-<div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+<div role="alert" aria-live="assertive" aria-atomic="true" class="toast show" data-autohide="false">
   <div class="toast-header">
     {{< placeholder width="20" height="20" background="#007aff" class="rounded mr-2" text="false" title="false" >}}
     <strong class="mr-auto">Bootstrap</strong>
@@ -262,6 +226,20 @@ Options can be passed via data attributes or JavaScript. For data attributes, ap
         <code>500</code>
       </td>
       <td>Delay hiding the toast (ms)</td>
+    </tr>
+    <tr>
+      <td>position</td>
+      <td>string</td>
+      <td>top-right</td>
+      <td>
+        <p>How to position the toast, can be: <code>top-center</code>, <code>top-left</code>, <code>top-right</code>, <code>bottom-center</code>, <code>bottom-left</code>, <code>bottom-right</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>positionMargin</td>
+      <td>number</td>
+      <td>10</td>
+      <td>Margin between toasts</td>
     </tr>
   </tbody>
 </table>

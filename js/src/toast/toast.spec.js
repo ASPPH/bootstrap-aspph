@@ -32,7 +32,7 @@ describe('Toast', () => {
 
       const toastEl = fixtureEl.querySelector('div')
       const toast = new Toast(toastEl, {
-        delay: 1
+        autohide: false
       })
 
       toastEl.addEventListener('shown.bs.toast', () => {
@@ -53,7 +53,7 @@ describe('Toast', () => {
       ].join('')
 
       const toastEl = fixtureEl.querySelector('div')
-      const toast = new Toast(toastEl)
+      const toast = new Toast(toastEl, { autohide: false })
 
       toastEl.addEventListener('shown.bs.toast', () => {
         expect(toastEl.classList.contains('show')).toEqual(true)
@@ -122,7 +122,7 @@ describe('Toast', () => {
 
     it('should not add fade class', done => {
       fixtureEl.innerHTML = [
-        '<div class="toast" data-delay="1" data-animation="false">',
+        '<div class="toast" data-animation="false">',
         '  <div class="toast-body">',
         '    a simple toast',
         '  </div>',
@@ -130,7 +130,7 @@ describe('Toast', () => {
       ].join('')
 
       const toastEl = fixtureEl.querySelector('.toast')
-      const toast = new Toast(toastEl)
+      const toast = new Toast(toastEl, { autohide: false })
 
       toastEl.addEventListener('shown.bs.toast', () => {
         expect(toastEl.classList.contains('fade')).toEqual(false)
@@ -142,7 +142,7 @@ describe('Toast', () => {
 
     it('should not trigger shown if show is prevented', done => {
       fixtureEl.innerHTML = [
-        '<div class="toast" data-delay="1" data-animation="false">',
+        '<div class="toast" data-animation="false">',
         '  <div class="toast-body">',
         '    a simple toast',
         '  </div>',
@@ -150,7 +150,7 @@ describe('Toast', () => {
       ].join('')
 
       const toastEl = fixtureEl.querySelector('.toast')
-      const toast = new Toast(toastEl)
+      const toast = new Toast(toastEl, { autohide: false })
 
       const assertDone = () => {
         setTimeout(() => {
@@ -176,10 +176,8 @@ describe('Toast', () => {
     it('should allow to hide toast manually', done => {
       fixtureEl.innerHTML = [
         '<div class="toast" data-delay="1" data-autohide="false">',
-        '  <div class="toast-body">',
-        '    a simple toast',
-        '  </div>',
-        '  </div>'
+        '  <div class="toast-body">a simple toast</div>',
+        '</div>'
       ].join('')
 
       const toastEl = fixtureEl.querySelector('.toast')
