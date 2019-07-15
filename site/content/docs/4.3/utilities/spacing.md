@@ -43,6 +43,8 @@ Where *size* is one of:
 
 (You can add more sizes by adding entries to the `$spacers` Sass map variable.)
 
+By default [RFS]({{< docsref "/getting-started/rfs" >}}) is enabled for the spacing utilities meaning the sizes of 4 and 5 will rescale according to the viewport width.
+
 ## Examples
 
 Here are some representative examples of these classes:
