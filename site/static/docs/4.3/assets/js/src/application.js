@@ -19,6 +19,29 @@
     return [].slice.call(list)
   }
 
+  (function () {
+    var checkbox = document.getElementById('flexCheckIndeterminate')
+
+    if (!checkbox) {
+      return
+    }
+
+    checkbox.indeterminate = true
+  })()
+
+  makeArray(document.querySelectorAll('.js-sidenav-group'))
+    .forEach(function (sidenavGroup) {
+      var groupHasLinks = Boolean(sidenavGroup.querySelector('li'))
+      var groupLink = sidenavGroup.querySelector('a')
+
+      if (groupHasLinks) {
+        groupLink.addEventListener('click', function (e) {
+          e.preventDefault()
+          e.target.parentNode.classList.toggle('active')
+        }, true)
+      }
+    })
+
   // Tooltip and popover demos
   makeArray(document.querySelectorAll('.tooltip-demo'))
     .forEach(function (tooltip) {
