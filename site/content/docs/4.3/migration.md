@@ -35,6 +35,7 @@ Changes to our source Sass files and compiled CSS.
 - Removed print styles and `$enable-print-styles` variable. Print display classes, however, have remained intact. [See #28339](https://github.com/twbs/bootstrap/pull/28339).
 - Dropped `color()`, `theme-color()` & `gray()` functions in favor of variables. [See #29083](https://github.com/twbs/bootstrap/pull/29083)
 - The `theme-color-level()` function is renamed to `color-level()` and now accepts any color you want instead of only `$theme-color` colors. [See #29083](https://github.com/twbs/bootstrap/pull/29083)
+- `$enable-grid-classes` doesn't disable the generation of container classes anymore [See #TODO]()
 
 ## JavaScript
 
