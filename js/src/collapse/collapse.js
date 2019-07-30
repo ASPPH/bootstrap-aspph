@@ -10,6 +10,7 @@ import {
   TRANSITION_END,
   emulateTransitionEnd,
   getSelectorFromElement,
+  getElementFromSelector,
   getTransitionDurationFromElement,
   isElement,
   makeArray,
@@ -172,7 +173,7 @@ class Collapse {
     if (actives) {
       actives.forEach(elemActive => {
         if (container !== elemActive) {
-          Collapse._collapseInterface(elemActive, 'hide')
+          Collapse.collapseInterface(elemActive, 'hide')
         }
 
         if (!activesData) {
@@ -244,15 +245,11 @@ class Collapse {
     if (triggerArrayLength > 0) {
       for (let i = 0; i < triggerArrayLength; i++) {
         const trigger = this._triggerArray[i]
-        const selector = getSelectorFromElement(trigger)
+        const elem = getElementFromSelector(trigger)
 
-        if (selector !== null) {
-          const elem = SelectorEngine.findOne(selector)
-
-          if (!elem.classList.contains(ClassName.SHOW)) {
-            trigger.classList.add(ClassName.COLLAPSED)
-            trigger.setAttribute('aria-expanded', false)
-          }
+        if (elem && !elem.classList.contains(ClassName.SHOW)) {
+          trigger.classList.add(ClassName.COLLAPSED)
+          trigger.setAttribute('aria-expanded', false)
         }
       }
     }
@@ -320,8 +317,7 @@ class Collapse {
 
     makeArray(SelectorEngine.find(selector, parent))
       .forEach(element => {
-        const selector = getSelectorFromElement(element)
-        const selected = selector ? SelectorEngine.findOne(selector) : null
+        const selected = getElementFromSelector(element)
 
         this._addAriaAndCollapsedClass(
           selected,
@@ -352,7 +348,7 @@ class Collapse {
 
   // Static
 
-  static _collapseInterface(element, config) {
+  static collapseInterface(element, config) {
     let data = Data.getData(element, DATA_KEY)
     const _config = {
       ...Default,
@@ -377,13 +373,13 @@ class Collapse {
     }
   }
 
-  static _jQueryInterface(config) {
+  static jQueryInterface(config) {
     return this.each(function () {
-      Collapse._collapseInterface(this, config)
+      Collapse.collapseInterface(this, config)
     })
   }
 
-  static _getInstance(element) {
+  static getInstance(element) {
     return Data.getData(element, DATA_KEY)
   }
 }
@@ -419,7 +415,7 @@ EventHandler.on(document, Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (
       config = triggerData
     }
 
-    Collapse._collapseInterface(element, config)
+    Collapse.collapseInterface(element, config)
   })
 })
 
@@ -432,11 +428,11 @@ EventHandler.on(document, Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (
 /* istanbul ignore if */
 if (typeof $ !== 'undefined') {
   const JQUERY_NO_CONFLICT = $.fn[NAME]
-  $.fn[NAME] = Collapse._jQueryInterface
+  $.fn[NAME] = Collapse.jQueryInterface
   $.fn[NAME].Constructor = Collapse
   $.fn[NAME].noConflict = () => {
     $.fn[NAME] = JQUERY_NO_CONFLICT
-    return Collapse._jQueryInterface
+    return Collapse.jQueryInterface
   }
 }
 
