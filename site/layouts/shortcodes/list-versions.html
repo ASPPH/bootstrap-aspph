@@ -1,8 +1,13 @@
 <div class="row">
-  {{- range $release := (index $.Site.Data "docs-versions") }}
+  {{- range $release := index $.Site.Data "docs-versions" -}}
+  {{ $latestStr := "" }}
+  {{- with $release.latest -}}
+  {{- $latestStr = " Last update was " -}}
+  {{ if eq . true }}{{ $latestStr = printf "%s%s" $latestStr $.Site.Params.current_version }}{{ else }}{{ $latestStr = printf "%s%s" $latestStr $release.latest }}{{ end }}
+  {{- end }}
   <div class="col-md">
     <h2>{{ $release.group }}</h2>
-    <p>{{ $release.description }}</p>
+    <p>{{ $release.description }}{{ $latestStr }}</p>
     {{- $versions := sort $release.versions "v" "desc" -}}
     {{- range $i, $version := $versions }}
       {{- $len := len $versions -}}
