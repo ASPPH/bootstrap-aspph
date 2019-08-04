@@ -5,16 +5,11 @@
  * --------------------------------------------------------------------------
  */
 
-import {
-  getjQuery,
-  TRANSITION_END,
-  emulateTransitionEnd,
-  getElementFromSelector,
-  getTransitionDurationFromElement
-} from '../util/index'
+import { getjQuery } from '../util/index'
+import { getRootElement, removeElement, triggerCloseEvent } from './private'
+import { DATA_KEY, Event } from './constants'
 import Data from '../dom/data'
 import EventHandler from '../dom/event-handler'
-import SelectorEngine from '../dom/selector-engine'
 
 /**
  * ------------------------------------------------------------------------
@@ -24,24 +19,8 @@ import SelectorEngine from '../dom/selector-engine'
 
 const NAME = 'alert'
 const VERSION = '4.3.1'
-const DATA_KEY = 'bs.alert'
-const EVENT_KEY = `.${DATA_KEY}`
-const DATA_API_KEY = '.data-api'
-
 const Selector = {
   DISMISS: '[data-dismiss="alert"]'
-}
-
-const Event = {
-  CLOSE: `close${EVENT_KEY}`,
-  CLOSED: `closed${EVENT_KEY}`,
-  CLICK_DATA_API: `click${EVENT_KEY}${DATA_API_KEY}`
-}
-
-const ClassName = {
-  ALERT: 'alert',
-  FADE: 'fade',
-  SHOW: 'show'
 }
 
 /**
@@ -70,60 +49,21 @@ class Alert {
   close(element) {
     let rootElement = this._element
     if (element) {
-      rootElement = this._getRootElement(element)
+      rootElement = getRootElement(element)
     }
 
-    const customEvent = this._triggerCloseEvent(rootElement)
+    const customEvent = triggerCloseEvent(rootElement)
 
     if (customEvent === null || customEvent.defaultPrevented) {
       return
     }
 
-    this._removeElement(rootElement)
+    removeElement(rootElement)
   }
 
   dispose() {
     Data.removeData(this._element, DATA_KEY)
     this._element = null
-  }
-
-  // Private
-
-  _getRootElement(element) {
-    let parent = getElementFromSelector(element)
-
-    if (!parent) {
-      parent = SelectorEngine.closest(element, `.${ClassName.ALERT}`)
-    }
-
-    return parent
-  }
-
-  _triggerCloseEvent(element) {
-    return EventHandler.trigger(element, Event.CLOSE)
-  }
-
-  _removeElement(element) {
-    element.classList.remove(ClassName.SHOW)
-
-    if (!element.classList.contains(ClassName.FADE)) {
-      this._destroyElement(element)
-      return
-    }
-
-    const transitionDuration = getTransitionDurationFromElement(element)
-
-    EventHandler
-      .one(element, TRANSITION_END, () => this._destroyElement(element))
-    emulateTransitionEnd(element, transitionDuration)
-  }
-
-  _destroyElement(element) {
-    if (element.parentNode) {
-      element.parentNode.removeChild(element)
-    }
-
-    EventHandler.trigger(element, Event.CLOSED)
   }
 
   // Static

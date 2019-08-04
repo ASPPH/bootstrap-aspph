@@ -90,12 +90,10 @@ describe('Alert', () => {
 
       const endTest = () => {
         setTimeout(() => {
-          expect(alert._removeElement).not.toHaveBeenCalled()
+          expect(fixtureEl.querySelector('.alert')).not.toBeNull()
           done()
         }, 10)
       }
-
-      spyOn(alert, '_removeElement')
 
       alertEl.addEventListener('close.bs.alert', event => {
         event.preventDefault()
