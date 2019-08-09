@@ -2,7 +2,7 @@
   min-height: 4rem;
   background-color: $bd-purple-bright;
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(lg) {
     .navbar-nav-scroll {
       width: 100%;
       height: 2.5rem;

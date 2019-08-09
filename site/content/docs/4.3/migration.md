@@ -35,6 +35,9 @@ Changes to our source Sass files and compiled CSS.
 - Removed print styles and `$enable-print-styles` variable. Print display classes, however, have remained intact. [See #28339](https://github.com/twbs/bootstrap/pull/28339).
 - Dropped `color()`, `theme-color()` & `gray()` functions in favor of variables. [See #29083](https://github.com/twbs/bootstrap/pull/29083)
 - The `theme-color-level()` function is renamed to `color-level()` and now accepts any color you want instead of only `$theme-color` colors. [See #29083](https://github.com/twbs/bootstrap/pull/29083)
+- Breakpoint media queries changes [See #29148](https://github.com/twbs/bootstrap/pull/29148)
+  - The `media-breakpoint-down()` mixin now uses the breakpoint itself instead of the next breakpoint
+  - The `media-breakpoint-between()` mixin's second parameter also uses the breakpoint itself instead of the next breakpoint
 
 ## JavaScript
 
