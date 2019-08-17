@@ -37,6 +37,16 @@ module:
       target:           static/apple-touch-icon.png
     - source:           site/static/docs/4.3/assets/img/favicons/favicon.ico
       target:           static/favicon.ico
+    - source:           node_modules/docsearch.js/dist/cdn/docsearch.min.css
+      target:           static/docs/4.3/assets/css/vendor/docsearch.min.css
+    - source:           node_modules/docsearch.js/dist/cdn/docsearch.min.js
+      target:           static/docs/4.3/assets/js/vendor/docsearch.min.js
+    - source:           node_modules/anchor-js/anchor.min.js
+      target:           static/docs/4.3/assets/js/vendor/anchor.min.js
+    - source:           node_modules/bs-custom-file-input/dist/bs-custom-file-input.min.js
+      target:           static/docs/4.3/assets/js/vendor/bs-custom-file-input.min.js
+    - source:           node_modules/clipboard/dist/clipboard.min.js
+      target:           static/docs/4.3/assets/js/vendor/clipboard.min.js
 
 params:
   description:          "The most popular HTML, CSS, and JS library in the world."
