@@ -5,10 +5,10 @@
 {{- end }}
 
 {{ if (or (eq .Page.Layout "docs") (eq .Page.Layout "single")) -}}
-<script src="/docs/{{ .Site.Params.docs_version }}/assets/js/vendor/docsearch.min.js"></script>
+<script src="/docs/{{ .Site.Params.docs_version }}/assets/js/docsearch.min.js"></script>
 {{- end }}
 
-{{- $vendor := resources.Match "js/vendor/*.js" -}}
+{{- $vendor := resources.Match "js/*.js" -}}
 {{- $js := resources.Match "js/src/*.js" -}}
 {{- $targetDocsJSPath := printf "/docs/%s/assets/js/docs.js" .Site.Params.docs_version -}}
 {{- $docsJs := append $js $vendor | resources.Concat $targetDocsJSPath -}}

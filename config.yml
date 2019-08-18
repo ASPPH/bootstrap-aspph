@@ -38,15 +38,15 @@ module:
     - source:           site/static/docs/4.3/assets/img/favicons/favicon.ico
       target:           static/favicon.ico
     - source:           node_modules/docsearch.js/dist/cdn/docsearch.min.css
-      target:           static/docs/4.3/assets/css/vendor/docsearch.min.css
+      target:           static/docs/4.3/assets/css/docsearch.min.css
     - source:           node_modules/docsearch.js/dist/cdn/docsearch.min.js
-      target:           static/docs/4.3/assets/js/vendor/docsearch.min.js
+      target:           static/docs/4.3/assets/js/docsearch.min.js
     - source:           node_modules/anchor-js/anchor.min.js
-      target:           static/docs/4.3/assets/js/vendor/anchor.min.js
+      target:           static/docs/4.3/assets/js/anchor.min.js
     - source:           node_modules/bs-custom-file-input/dist/bs-custom-file-input.min.js
-      target:           static/docs/4.3/assets/js/vendor/bs-custom-file-input.min.js
+      target:           static/docs/4.3/assets/js/bs-custom-file-input.min.js
     - source:           node_modules/clipboard/dist/clipboard.min.js
-      target:           static/docs/4.3/assets/js/vendor/clipboard.min.js
+      target:           static/docs/4.3/assets/js/clipboard.min.js
 
 params:
   description:          "The most popular HTML, CSS, and JS library in the world."

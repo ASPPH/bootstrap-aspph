@@ -7,7 +7,7 @@
 
 {{ if (or (eq .Page.Layout "docs") (eq .Page.Layout "single")) -}}
 {{- "<!-- Documentation extras -->" | safeHTML }}
-<link href="/docs/{{ .Site.Params.docs_version }}/assets/css/vendor/docsearch.min.css" rel="stylesheet">
+<link href="/docs/{{ .Site.Params.docs_version }}/assets/css/docsearch.min.css" rel="stylesheet">
 {{- end -}}
 
 {{- if (ne .Page.Layout "examples") }}
