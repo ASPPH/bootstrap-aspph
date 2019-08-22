@@ -1,5 +1,3 @@
-// stylelint-disable selector-no-qualifying-type
-
 //
 // Base styles
 //
@@ -32,12 +30,13 @@
   // Disabled comes first so active can properly restyle
   &.disabled,
   &:disabled {
+    pointer-events: none;
     opacity: $btn-disabled-opacity;
     @include box-shadow(none);
   }
 
-  &:not(:disabled):not(.disabled):active,
-  &:not(:disabled):not(.disabled).active {
+  &:active,
+  &.active {
     @include box-shadow($btn-active-box-shadow);
 
     &:focus {
@@ -46,9 +45,8 @@
   }
 }
 
-// Future-proof disabling of clicks on `<a>` elements
-a.btn.disabled,
-fieldset:disabled a.btn {
+// stylelint-disable-next-line selector-no-qualifying-type
+fieldset:disabled .btn {
   pointer-events: none;
 }
 
@@ -94,7 +92,6 @@ fieldset:disabled a.btn {
   &:disabled,
   &.disabled {
     color: $btn-link-disabled-color;
-    pointer-events: none;
   }
 
   // No need for an active state here
