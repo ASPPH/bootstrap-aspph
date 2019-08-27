@@ -16,6 +16,7 @@
   > .form-file {
     position: relative; // For focus state's z-index
     flex: 1 1 0%;
+    min-width: 0; // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
     margin-bottom: 0;
 
     + .form-control,
@@ -122,7 +123,10 @@
 // Remix the default form control sizing classes into new ones for easier
 // manipulation.
 
-.input-group-lg > .form-control:not(textarea),
+.input-group-lg > .form-control {
+  min-height: $input-height-lg;
+}
+
 .input-group-lg > .form-select {
   height: $input-height-lg;
 }
@@ -139,7 +143,10 @@
   @include border-radius($input-border-radius-lg);
 }
 
-.input-group-sm > .form-control:not(textarea),
+.input-group-sm > .form-control {
+  min-height: $input-height-sm;
+}
+
 .input-group-sm > .form-select {
   height: $input-height-sm;
 }
