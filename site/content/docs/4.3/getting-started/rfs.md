@@ -26,9 +26,9 @@ The `rfs()` mixin has shorthands for `font-size`, `margin`, `margin-top`, `margi
 }
 ```
 
-which outputs the following `css`:
+which outputs the following CSS:
 
-```scss
+```css
 .title {
   font-size: calc(1.525rem + 3.3vw);
 }
@@ -61,7 +61,7 @@ Any other property can be passed to the `rfs()` mixin like this:
 - `rfs-value()` converts a value into a `rem` value if a `px` value is passed, in other cases it returns the same result.
 - `rfs-fluid-value()` returns the fluid version of a value if the property needs rescaling.
 
-In this example we use one of Bootstrap's build-in [responsive breakpoint mixins]({{< docsref "/layout/overview#responsive-breakpoints" >}}) to only apply styling below the `lg` breakpoint.
+In this example we use one of Bootstrap's built-in [responsive breakpoint mixins]({{< docsref "/layout/overview#responsive-breakpoints" >}}) to only apply styling below the `lg` breakpoint.
 
 ```scss
 .selector {
