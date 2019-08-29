@@ -20,6 +20,7 @@ import Data from '../dom/data'
 import EventHandler from '../dom/event-handler'
 import Manipulator from '../dom/manipulator'
 import SelectorEngine from '../dom/selector-engine'
+import { addClass, removeClass, hasClass } from '../dom/class-list'
 
 /**
  * ------------------------------------------------------------------------
@@ -121,7 +122,7 @@ class Modal {
       return
     }
 
-    if (Manipulator.containsClass(this._element, ClassName.FADE)) {
+    if (hasClass(this._element, ClassName.FADE)) {
       this._isTransitioning = true
     }
 
@@ -176,7 +177,7 @@ class Modal {
     }
 
     this._isShown = false
-    const transition = Manipulator.containsClass(this._element, ClassName.FADE)
+    const transition = hasClass(this._element, ClassName.FADE)
 
     if (transition) {
       this._isTransitioning = true
@@ -187,7 +188,7 @@ class Modal {
 
     EventHandler.off(document, Event.FOCUSIN)
 
-    Manipulator.removeClass(this._element, ClassName.SHOW)
+    removeClass(this._element, ClassName.SHOW)
 
     EventHandler.off(this._element, Event.CLICK_DISMISS)
     EventHandler.off(this._dialog, Event.MOUSEDOWN_DISMISS)
@@ -242,7 +243,7 @@ class Modal {
   }
 
   _showElement(relatedTarget) {
-    const transition = Manipulator.containsClass(this._element, ClassName.FADE)
+    const transition = hasClass(this._element, ClassName.FADE)
     const modalBody = SelectorEngine.findOne(Selector.MODAL_BODY, this._dialog)
 
     if (!this._element.parentNode ||
@@ -255,7 +256,7 @@ class Modal {
     this._element.removeAttribute('aria-hidden')
     this._element.setAttribute('aria-modal', true)
 
-    if (Manipulator.containsClass(this._dialog, ClassName.SCROLLABLE) && modalBody) {
+    if (hasClass(this._dialog, ClassName.SCROLLABLE) && modalBody) {
       modalBody.scrollTop = 0
     } else {
       this._element.scrollTop = 0
@@ -265,7 +266,7 @@ class Modal {
       reflow(this._element)
     }
 
-    Manipulator.addClass(this._element, ClassName.SHOW)
+    addClass(this._element, ClassName.SHOW)
 
     if (this._config.focus) {
       this._enforceFocus()
@@ -330,7 +331,7 @@ class Modal {
     this._element.removeAttribute('aria-modal')
     this._isTransitioning = false
     this._showBackdrop(() => {
-      Manipulator.removeClass(document.body, ClassName.OPEN)
+      removeClass(document.body, ClassName.OPEN)
       this._resetAdjustments()
       this._resetScrollbar()
       EventHandler.trigger(this._element, Event.HIDDEN)
@@ -343,7 +344,7 @@ class Modal {
   }
 
   _showBackdrop(callback) {
-    const animate = Manipulator.containsClass(this._element, ClassName.FADE) ?
+    const animate = hasClass(this._element, ClassName.FADE) ?
       ClassName.FADE :
       ''
 
@@ -352,7 +353,7 @@ class Modal {
       this._backdrop.className = ClassName.BACKDROP
 
       if (animate) {
-        Manipulator.addClass(this._backdrop, animate)
+        addClass(this._backdrop, animate)
       }
 
       document.body.appendChild(this._backdrop)
@@ -378,7 +379,7 @@ class Modal {
         reflow(this._backdrop)
       }
 
-      Manipulator.addClass(this._backdrop, ClassName.SHOW)
+      addClass(this._backdrop, ClassName.SHOW)
 
       if (!animate) {
         callback()
@@ -390,14 +391,14 @@ class Modal {
       EventHandler.one(this._backdrop, TRANSITION_END, callback)
       emulateTransitionEnd(this._backdrop, backdropTransitionDuration)
     } else if (!this._isShown && this._backdrop) {
-      Manipulator.removeClass(this._backdrop, ClassName.SHOW)
+      removeClass(this._backdrop, ClassName.SHOW)
 
       const callbackRemove = () => {
         this._removeBackdrop()
         callback()
       }
 
-      if (Manipulator.containsClass(this._element, ClassName.FADE)) {
+      if (hasClass(this._element, ClassName.FADE)) {
         const backdropTransitionDuration = getTransitionDurationFromElement(this._backdrop)
         EventHandler.one(this._backdrop, TRANSITION_END, callbackRemove)
         emulateTransitionEnd(this._backdrop, backdropTransitionDuration)
@@ -468,7 +469,7 @@ class Modal {
       document.body.style.paddingRight = `${parseFloat(calculatedPadding) + this._scrollbarWidth}px`
     }
 
-    Manipulator.addClass(document.body, ClassName.OPEN)
+    addClass(document.body, ClassName.OPEN)
   }
 
   _resetScrollbar() {

@@ -50,14 +50,12 @@ const defaultPluginConfig = {
   external: [
     bsPlugins.Data,
     bsPlugins.EventHandler,
-    bsPlugins.SelectorEngine,
-    bsPlugins.Manipulator
+    bsPlugins.SelectorEngine
   ],
   globals: {
     [bsPlugins.Data]: 'Data',
     [bsPlugins.EventHandler]: 'EventHandler',
-    [bsPlugins.SelectorEngine]: 'SelectorEngine',
-    [bsPlugins.Manipulator]: 'Manipulator'
+    [bsPlugins.SelectorEngine]: 'SelectorEngine'
   }
 }
 

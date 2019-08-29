@@ -9,7 +9,7 @@ import { getjQuery } from '../util/index'
 import Data from '../dom/data'
 import EventHandler from '../dom/event-handler'
 import SelectorEngine from '../dom/selector-engine'
-import Manipulator from '../dom/manipulator'
+import { addClass, removeClass, hasClass, toggleClass } from '../dom/class-list'
 
 /**
  * ------------------------------------------------------------------------
@@ -76,25 +76,25 @@ class Button {
       const input = SelectorEngine.findOne(Selector.INPUT, this._element)
 
       if (input && input.type === 'radio') {
-        if (input.checked && Manipulator.containsClass(this._element, ClassName.ACTIVE)) {
+        if (input.checked && hasClass(this._element, ClassName.ACTIVE)) {
           triggerChangeEvent = false
         } else {
           const activeElement = SelectorEngine.findOne(Selector.ACTIVE, rootElement)
 
           if (activeElement) {
-            Manipulator.removeClass(activeElement, ClassName.ACTIVE)
+            removeClass(activeElement, ClassName.ACTIVE)
           }
         }
 
         if (triggerChangeEvent) {
           if (input.hasAttribute('disabled') ||
             rootElement.hasAttribute('disabled') ||
-            Manipulator.containsClass(input, 'disabled') ||
-            Manipulator.containsClass(rootElement, 'disabled')) {
+            hasClass(input, 'disabled') ||
+            hasClass(rootElement, 'disabled')) {
             return
           }
 
-          input.checked = !Manipulator.containsClass(this._element, ClassName.ACTIVE)
+          input.checked = !hasClass(this._element, ClassName.ACTIVE)
           EventHandler.trigger(input, 'change')
         }
 
@@ -104,11 +104,11 @@ class Button {
     }
 
     if (addAriaPressed) {
-      this._element.setAttribute('aria-pressed', !Manipulator.containsClass(this._element, ClassName.ACTIVE))
+      this._element.setAttribute('aria-pressed', !hasClass(this._element, ClassName.ACTIVE))
     }
 
     if (triggerChangeEvent) {
-      Manipulator.toggleClass(this._element, ClassName.ACTIVE)
+      toggleClass(this._element, ClassName.ACTIVE)
     }
   }
 
@@ -148,7 +148,7 @@ EventHandler.on(document, Event.CLICK_DATA_API, Selector.DATA_TOGGLE_CARROT, eve
   event.preventDefault()
 
   let button = event.target
-  if (!Manipulator.containsClass(button, ClassName.BUTTON)) {
+  if (!hasClass(button, ClassName.BUTTON)) {
     button = SelectorEngine.closest(button, Selector.BUTTON)
   }
 
@@ -164,7 +164,7 @@ EventHandler.on(document, Event.FOCUS_DATA_API, Selector.DATA_TOGGLE_CARROT, eve
   const button = SelectorEngine.closest(event.target, Selector.BUTTON)
 
   if (button) {
-    Manipulator.addClass(button, ClassName.FOCUS)
+    addClass(button, ClassName.FOCUS)
   }
 })
 
@@ -172,7 +172,7 @@ EventHandler.on(document, Event.BLUR_DATA_API, Selector.DATA_TOGGLE_CARROT, even
   const button = SelectorEngine.closest(event.target, Selector.BUTTON)
 
   if (button) {
-    Manipulator.removeClass(button, ClassName.FOCUS)
+    removeClass(button, ClassName.FOCUS)
   }
 })
 

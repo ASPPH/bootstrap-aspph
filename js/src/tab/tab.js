@@ -17,7 +17,7 @@ import {
 import Data from '../dom/data'
 import EventHandler from '../dom/event-handler'
 import SelectorEngine from '../dom/selector-engine'
-import Manipulator from '../dom/manipulator'
+import { addClass, removeClass, hasClass } from '../dom/class-list'
 
 /**
  * ------------------------------------------------------------------------
@@ -81,8 +81,8 @@ class Tab {
   show() {
     if ((this._element.parentNode &&
       this._element.parentNode.nodeType === Node.ELEMENT_NODE &&
-      Manipulator.containsClass(this._element, ClassName.ACTIVE)) ||
-      Manipulator.containsClass(this._element, ClassName.DISABLED)) {
+      hasClass(this._element, ClassName.ACTIVE)) ||
+      hasClass(this._element, ClassName.DISABLED)) {
       return
     }
 
@@ -148,7 +148,7 @@ class Tab {
 
     const active = activeElements[0]
     const isTransitioning = callback &&
-      (active && Manipulator.containsClass(active, ClassName.FADE))
+      (active && hasClass(active, ClassName.FADE))
 
     const complete = () => this._transitionComplete(
       element,
@@ -158,7 +158,7 @@ class Tab {
 
     if (active && isTransitioning) {
       const transitionDuration = getTransitionDurationFromElement(active)
-      Manipulator.removeClass(active, ClassName.SHOW)
+      removeClass(active, ClassName.SHOW)
 
       EventHandler.one(active, TRANSITION_END, complete)
       emulateTransitionEnd(active, transitionDuration)
@@ -169,12 +169,12 @@ class Tab {
 
   _transitionComplete(element, active, callback) {
     if (active) {
-      Manipulator.removeClass(active, ClassName.ACTIVE)
+      removeClass(active, ClassName.ACTIVE)
 
       const dropdownChild = SelectorEngine.findOne(Selector.DROPDOWN_ACTIVE_CHILD, active.parentNode)
 
       if (dropdownChild) {
-        Manipulator.removeClass(dropdownChild, ClassName.ACTIVE)
+        removeClass(dropdownChild, ClassName.ACTIVE)
       }
 
       if (active.getAttribute('role') === 'tab') {
@@ -182,23 +182,23 @@ class Tab {
       }
     }
 
-    Manipulator.addClass(element, ClassName.ACTIVE)
+    addClass(element, ClassName.ACTIVE)
     if (element.getAttribute('role') === 'tab') {
       element.setAttribute('aria-selected', true)
     }
 
     reflow(element)
 
-    if (Manipulator.containsClass(element, ClassName.FADE)) {
-      Manipulator.addClass(element, ClassName.SHOW)
+    if (hasClass(element, ClassName.FADE)) {
+      addClass(element, ClassName.SHOW)
     }
 
-    if (element.parentNode && Manipulator.containsClass(element.parentNode, ClassName.DROPDOWN_MENU)) {
+    if (element.parentNode && hasClass(element.parentNode, ClassName.DROPDOWN_MENU)) {
       const dropdownElement = SelectorEngine.closest(element, Selector.DROPDOWN)
 
       if (dropdownElement) {
         makeArray(SelectorEngine.find(Selector.DROPDOWN_TOGGLE))
-          .forEach(dropdown => Manipulator.addClass(dropdown, ClassName.ACTIVE))
+          .forEach(dropdown => addClass(dropdown, ClassName.ACTIVE))
       }
 
       element.setAttribute('aria-expanded', true)
