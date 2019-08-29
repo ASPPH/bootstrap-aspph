@@ -131,11 +131,11 @@ class Dropdown {
   // Public
 
   toggle() {
-    if (this._element.disabled || this._element.classList.contains(ClassName.DISABLED)) {
+    if (this._element.disabled || Manipulator.containsClass(this._element, ClassName.DISABLED)) {
       return
     }
 
-    const isActive = this._menu.classList.contains(ClassName.SHOW)
+    const isActive = Manipulator.containsClass(this._menu, ClassName.SHOW)
 
     Dropdown.clearMenus()
 
@@ -147,7 +147,7 @@ class Dropdown {
   }
 
   show() {
-    if (this._element.disabled || this._element.classList.contains(ClassName.DISABLED) || this._menu.classList.contains(ClassName.SHOW)) {
+    if (this._element.disabled || Manipulator.containsClass(this._element, ClassName.DISABLED) || Manipulator.containsClass(this._menu, ClassName.SHOW)) {
       return
     }
 
@@ -185,7 +185,7 @@ class Dropdown {
       // to allow the menu to "escape" the scroll parent's boundaries
       // https://github.com/twbs/bootstrap/issues/24251
       if (this._config.boundary !== 'scrollParent') {
-        parent.classList.add(ClassName.POSITION_STATIC)
+        Manipulator.addClass(parent, ClassName.POSITION_STATIC)
       }
 
       this._popper = new Popper(referenceElement, this._menu, this._getPopperConfig())
@@ -210,7 +210,7 @@ class Dropdown {
   }
 
   hide() {
-    if (this._element.disabled || this._element.classList.contains(ClassName.DISABLED) || !this._menu.classList.contains(ClassName.SHOW)) {
+    if (this._element.disabled || Manipulator.containsClass(this._element, ClassName.DISABLED) || !Manipulator.containsClass(this._menu, ClassName.SHOW)) {
       return
     }
 
@@ -289,16 +289,17 @@ class Dropdown {
     let placement = AttachmentMap.BOTTOM
 
     // Handle dropup
-    if (parentDropdown.classList.contains(ClassName.DROPUP)) {
+    if (Manipulator.containsClass(parentDropdown, ClassName.DROPUP)) {
       placement = AttachmentMap.TOP
-      if (this._menu.classList.contains(ClassName.MENURIGHT)) {
+
+      if (Manipulator.containsClass(this._menu, ClassName.MENURIGHT)) {
         placement = AttachmentMap.TOPEND
       }
-    } else if (parentDropdown.classList.contains(ClassName.DROPRIGHT)) {
+    } else if (Manipulator.containsClass(parentDropdown, ClassName.DROPRIGHT)) {
       placement = AttachmentMap.RIGHT
-    } else if (parentDropdown.classList.contains(ClassName.DROPLEFT)) {
+    } else if (Manipulator.containsClass(parentDropdown, ClassName.DROPLEFT)) {
       placement = AttachmentMap.LEFT
-    } else if (this._menu.classList.contains(ClassName.MENURIGHT)) {
+    } else if (Manipulator.containsClass(this._menu, ClassName.MENURIGHT)) {
       placement = AttachmentMap.BOTTOMEND
     }
 
@@ -403,7 +404,7 @@ class Dropdown {
       }
 
       const dropdownMenu = context._menu
-      if (!parent.classList.contains(ClassName.SHOW)) {
+      if (!Manipulator.containsClass(parent, ClassName.SHOW)) {
         continue
       }
 
@@ -432,8 +433,8 @@ class Dropdown {
         context._popper.destroy()
       }
 
-      dropdownMenu.classList.remove(ClassName.SHOW)
-      parent.classList.remove(ClassName.SHOW)
+      Manipulator.removeClass(dropdownMenu, ClassName.SHOW)
+      Manipulator.removeClass(parent, ClassName.SHOW)
       EventHandler.trigger(parent, Event.HIDDEN, relatedTarget)
     }
   }
@@ -461,12 +462,12 @@ class Dropdown {
     event.preventDefault()
     event.stopPropagation()
 
-    if (this.disabled || this.classList.contains(ClassName.DISABLED)) {
+    if (this.disabled || Manipulator.containsClass(this, ClassName.DISABLED)) {
       return
     }
 
     const parent = Dropdown.getParentFromElement(this)
-    const isActive = parent.classList.contains(ClassName.SHOW)
+    const isActive = Manipulator.containsClass(parent, ClassName.SHOW)
 
     if (!isActive || (isActive && (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE))) {
       if (event.which === ESCAPE_KEYCODE) {

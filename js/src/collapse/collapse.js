@@ -124,7 +124,7 @@ class Collapse {
   // Public
 
   toggle() {
-    if (this._element.classList.contains(ClassName.SHOW)) {
+    if (Manipulator.containsClass(this._element, ClassName.SHOW)) {
       this.hide()
     } else {
       this.show()
@@ -132,8 +132,7 @@ class Collapse {
   }
 
   show() {
-    if (this._isTransitioning ||
-      this._element.classList.contains(ClassName.SHOW)) {
+    if (this._isTransitioning || Manipulator.containsClass(this._element, ClassName.SHOW)) {
       return
     }
 
@@ -147,10 +146,10 @@ class Collapse {
             return elem.getAttribute('data-parent') === this._config.parent
           }
 
-          return elem.classList.contains(ClassName.COLLAPSE)
+          return Manipulator.containsClass(elem, ClassName.COLLAPSE)
         })
 
-      if (actives.length === 0) {
+      if (!actives.length) {
         actives = null
       }
     }
@@ -184,14 +183,14 @@ class Collapse {
 
     const dimension = this._getDimension()
 
-    this._element.classList.remove(ClassName.COLLAPSE)
-    this._element.classList.add(ClassName.COLLAPSING)
+    Manipulator.removeClass(this._element, ClassName.COLLAPSE)
+    Manipulator.addClass(this._element, ClassName.COLLAPSING)
 
     this._element.style[dimension] = 0
 
     if (this._triggerArray.length) {
       this._triggerArray.forEach(element => {
-        element.classList.remove(ClassName.COLLAPSED)
+        Manipulator.removeClass(element, ClassName.COLLAPSED)
         element.setAttribute('aria-expanded', true)
       })
     }
@@ -199,9 +198,8 @@ class Collapse {
     this.setTransitioning(true)
 
     const complete = () => {
-      this._element.classList.remove(ClassName.COLLAPSING)
-      this._element.classList.add(ClassName.COLLAPSE)
-      this._element.classList.add(ClassName.SHOW)
+      Manipulator.removeClass(this._element, ClassName.COLLAPSING)
+      Manipulator.addClass(this._element, ClassName.COLLAPSE, ClassName.SHOW)
 
       this._element.style[dimension] = ''
 
@@ -221,8 +219,7 @@ class Collapse {
   }
 
   hide() {
-    if (this._isTransitioning ||
-      !this._element.classList.contains(ClassName.SHOW)) {
+    if (this._isTransitioning || !Manipulator.containsClass(this._element, ClassName.SHOW)) {
       return
     }
 
@@ -237,9 +234,8 @@ class Collapse {
 
     reflow(this._element)
 
-    this._element.classList.add(ClassName.COLLAPSING)
-    this._element.classList.remove(ClassName.COLLAPSE)
-    this._element.classList.remove(ClassName.SHOW)
+    Manipulator.addClass(this._element, ClassName.COLLAPSING)
+    Manipulator.removeClass(this._element, ClassName.COLLAPSE, ClassName.SHOW)
 
     const triggerArrayLength = this._triggerArray.length
     if (triggerArrayLength > 0) {
@@ -247,8 +243,8 @@ class Collapse {
         const trigger = this._triggerArray[i]
         const elem = getElementFromSelector(trigger)
 
-        if (elem && !elem.classList.contains(ClassName.SHOW)) {
-          trigger.classList.add(ClassName.COLLAPSED)
+        if (elem && !Manipulator.containsClass(elem, ClassName.SHOW)) {
+          Manipulator.addClass(trigger, ClassName.COLLAPSED)
           trigger.setAttribute('aria-expanded', false)
         }
       }
@@ -258,8 +254,8 @@ class Collapse {
 
     const complete = () => {
       this.setTransitioning(false)
-      this._element.classList.remove(ClassName.COLLAPSING)
-      this._element.classList.add(ClassName.COLLAPSE)
+      Manipulator.removeClass(this._element, ClassName.COLLAPSING)
+      Manipulator.addClass(this._element, ClassName.COLLAPSE)
       EventHandler.trigger(this._element, Event.HIDDEN)
     }
 
@@ -297,7 +293,8 @@ class Collapse {
   }
 
   _getDimension() {
-    const hasWidth = this._element.classList.contains(Dimension.WIDTH)
+    const hasWidth = Manipulator.containsClass(this._element, Dimension.WIDTH)
+
     return hasWidth ? Dimension.WIDTH : Dimension.HEIGHT
   }
 
@@ -330,16 +327,11 @@ class Collapse {
 
   _addAriaAndCollapsedClass(element, triggerArray) {
     if (element) {
-      const isOpen = element.classList.contains(ClassName.SHOW)
+      const isOpen = Manipulator.containsClass(element, ClassName.SHOW)
 
       if (triggerArray.length) {
         triggerArray.forEach(elem => {
-          if (isOpen) {
-            elem.classList.remove(ClassName.COLLAPSED)
-          } else {
-            elem.classList.add(ClassName.COLLAPSED)
-          }
-
+          Manipulator[isOpen ? 'removeClass' : 'addClass'](elem, ClassName.COLLAPSED)
           elem.setAttribute('aria-expanded', isOpen)
         })
       }

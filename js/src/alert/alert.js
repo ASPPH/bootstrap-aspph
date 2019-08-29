@@ -15,6 +15,7 @@ import {
 import Data from '../dom/data'
 import EventHandler from '../dom/event-handler'
 import SelectorEngine from '../dom/selector-engine'
+import Manipulator from '../dom/manipulator'
 
 /**
  * ------------------------------------------------------------------------
@@ -104,9 +105,9 @@ class Alert {
   }
 
   _removeElement(element) {
-    element.classList.remove(ClassName.SHOW)
+    Manipulator.removeClass(element, ClassName.SHOW)
 
-    if (!element.classList.contains(ClassName.FADE)) {
+    if (!Manipulator.containsClass(element, ClassName.FADE)) {
       this._destroyElement(element)
       return
     }

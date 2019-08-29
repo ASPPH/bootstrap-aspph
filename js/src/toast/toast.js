@@ -98,12 +98,12 @@ class Toast {
     }
 
     if (this._config.animation) {
-      this._element.classList.add(ClassName.FADE)
+      Manipulator.addClass(this._element, ClassName.FADE)
     }
 
     const complete = () => {
-      this._element.classList.remove(ClassName.SHOWING)
-      this._element.classList.add(ClassName.SHOW)
+      Manipulator.removeClass(this._element, ClassName.SHOWING)
+      Manipulator.addClass(this._element, ClassName.SHOW)
 
       EventHandler.trigger(this._element, Event.SHOWN)
 
@@ -114,9 +114,9 @@ class Toast {
       }
     }
 
-    this._element.classList.remove(ClassName.HIDE)
+    Manipulator.removeClass(this._element, ClassName.HIDE)
     reflow(this._element)
-    this._element.classList.add(ClassName.SHOWING)
+    Manipulator.addClass(this._element, ClassName.SHOWING)
     if (this._config.animation) {
       const transitionDuration = getTransitionDurationFromElement(this._element)
 
@@ -128,7 +128,7 @@ class Toast {
   }
 
   hide() {
-    if (!this._element.classList.contains(ClassName.SHOW)) {
+    if (!Manipulator.containsClass(this._element, ClassName.SHOW)) {
       return
     }
 
@@ -139,11 +139,11 @@ class Toast {
     }
 
     const complete = () => {
-      this._element.classList.add(ClassName.HIDE)
+      Manipulator.addClass(this._element, ClassName.HIDE)
       EventHandler.trigger(this._element, Event.HIDDEN)
     }
 
-    this._element.classList.remove(ClassName.SHOW)
+    Manipulator.removeClass(this._element, ClassName.SHOW)
     if (this._config.animation) {
       const transitionDuration = getTransitionDurationFromElement(this._element)
 
@@ -158,8 +158,8 @@ class Toast {
     clearTimeout(this._timeout)
     this._timeout = null
 
-    if (this._element.classList.contains(ClassName.SHOW)) {
-      this._element.classList.remove(ClassName.SHOW)
+    if (Manipulator.containsClass(this._element, ClassName.SHOW)) {
+      Manipulator.removeClass(this._element, ClassName.SHOW)
     }
 
     EventHandler.off(this._element, Event.CLICK_DISMISS)
