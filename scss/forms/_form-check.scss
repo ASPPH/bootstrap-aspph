@@ -95,7 +95,7 @@
     background-image: escape-svg($form-switch-bg-image);
     background-repeat: no-repeat;
     background-position: left center;
-    background-size: calc(#{$form-switch-height} - 2px); // Get a 1px separation
+    background-size: subtruct($form-switch-height, 2px); // Get a 1px separation
     @include border-radius($form-switch-border-radius);
     // Todo: Figure out how to tackle these, with or without mixin?
     // transition: $form-switch-transition;
