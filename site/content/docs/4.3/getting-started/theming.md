@@ -232,7 +232,7 @@ $border-width: 1px;
 
 .element {
   // Output the same calc(.25rem - 1px) as above
-  border-radius: subtract($border-radius - $border-width);
+  border-radius: subtract($border-radius, $border-width);
 }
 {{< /highlight >}}
 
@@ -249,7 +249,7 @@ $border-width: 0;
 
 .element {
   // Output .25rem
-  border-radius: subtract($border-radius - $border-width);
+  border-radius: subtract($border-radius, $border-width);
 }
 {{< /highlight >}}
 
