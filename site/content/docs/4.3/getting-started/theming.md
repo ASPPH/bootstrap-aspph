@@ -215,9 +215,9 @@ You can also specify a base color with our color map functions:
 
 We use the `escape-svg` function to escape the `<`, `>` and `#` characters for SVG background images. These characters need to be escaped to properly render the background images in IE.
 
-## Add and Subtruct function
+## Add and Subtract function
 
-We use the `add` and `subtruct` functions instead of the CSS `calc` function. The primary purpose of these functions is to avoid errors when "unitless" 0 is given to the `calc` expression.
+We use the `add` and `subtract` functions instead of the CSS `calc` function. The primary purpose of these functions is to avoid errors when "unitless" 0 is given to the `calc` expression.
 
 Example where the calc is valid:
 
@@ -232,7 +232,7 @@ $border-width: 1px;
 
 .element {
   // Output the same calc(.25rem - 1px) as above
-  border-radius: subtruct($border-radius - $border-width);
+  border-radius: subtract($border-radius - $border-width);
 }
 {{< /highlight >}}
 
@@ -249,7 +249,7 @@ $border-width: 0;
 
 .element {
   // Output .25rem
-  border-radius: subtruct($border-radius - $border-width);
+  border-radius: subtract($border-radius - $border-width);
 }
 {{< /highlight >}}
 
