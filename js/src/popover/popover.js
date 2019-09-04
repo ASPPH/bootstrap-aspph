@@ -112,7 +112,7 @@ class Popover extends Tooltip {
     this.setElementContent(SelectorEngine.findOne(Selector.TITLE, tip), this.getTitle())
     let content = this._getContent()
     if (typeof content === 'function') {
-      content = content.call(this.element)
+      content = content.call(this._element)
     }
 
     this.setElementContent(SelectorEngine.findOne(Selector.CONTENT, tip), content)
@@ -128,7 +128,7 @@ class Popover extends Tooltip {
   // Private
 
   _getContent() {
-    return this.element.getAttribute('data-content') ||
+    return this._element.getAttribute('data-content') ||
       this.config.content
   }
 
@@ -166,10 +166,6 @@ class Popover extends Tooltip {
         data[config]()
       }
     })
-  }
-
-  static getInstance(element) {
-    return Data.getData(element, DATA_KEY)
   }
 }
 

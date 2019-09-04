@@ -60,7 +60,8 @@ const rollupPreprocessor = {
         'createClass',
         'inheritsLoose',
         'defineProperty',
-        'objectSpread2'
+        'objectSpread2',
+        'assertThisInitialized'
       ],
       plugins: [
         '@babel/plugin-proposal-object-rest-spread'

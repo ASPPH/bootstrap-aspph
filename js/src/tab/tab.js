@@ -17,6 +17,7 @@ import {
 import Data from '../dom/data'
 import EventHandler from '../dom/event-handler'
 import SelectorEngine from '../dom/selector-engine'
+import BaseComponent from '../base-component'
 
 /**
  * ------------------------------------------------------------------------
@@ -62,17 +63,15 @@ const Selector = {
  * ------------------------------------------------------------------------
  */
 
-class Tab {
-  constructor(element) {
-    this._element = element
-
-    Data.setData(this._element, DATA_KEY, this)
-  }
-
+class Tab extends BaseComponent {
   // Getters
 
   static get VERSION() {
     return VERSION
+  }
+
+  static get DATA_KEY() {
+    return DATA_KEY
   }
 
   // Public
@@ -222,10 +221,6 @@ class Tab {
         data[config]()
       }
     })
-  }
-
-  static getInstance(element) {
-    return Data.getData(element, DATA_KEY)
   }
 }
 

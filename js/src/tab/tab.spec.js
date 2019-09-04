@@ -411,6 +411,7 @@ describe('Tab', () => {
       const tab = new Tab(divEl)
 
       expect(Tab.getInstance(divEl)).toEqual(tab)
+      expect(Tab.getInstance(divEl) instanceof Tab).toEqual(true)
     })
   })
 
