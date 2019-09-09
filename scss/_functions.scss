@@ -103,10 +103,6 @@
 
 // Return valid calc
 @function add($value1, $value2, $return-calc: true) {
-  @if $value1 == null and $value2 == null {
-    @return null;
-  }
-
   @if $value1 == null {
     @return $value2;
   }
