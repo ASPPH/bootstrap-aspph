@@ -29,7 +29,7 @@ Navbars come with built-in support for a handful of sub-components. Choose from 
 - `.navbar-brand` for your company, product, or project name.
 - `.navbar-nav` for a full-height and lightweight navigation (including support for dropdowns).
 - `.navbar-toggler` for use with our collapse plugin and other [navigation toggling](#responsive-behaviors) behaviors.
-- `.form-inline` for any form controls and actions.
+- `.row`s for grid content or any form controls and actions.
 - `.navbar-text` for adding vertically centered strings of text.
 - `.collapse.navbar-collapse` for grouping and hiding navbar contents by a parent breakpoint.
 
@@ -65,9 +65,13 @@ Here's an example of all the sub-components included in a responsive light-theme
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form class="row g-2 mt-3 mt-lg-0 pl-lg-2">
+      <div class="col-auto">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </div>
     </form>
   </div>
 </nav>
@@ -198,13 +202,18 @@ You may also utilize dropdowns in your navbar nav. Dropdown menus require a wrap
 
 ### Forms
 
-Place various form controls and components within a navbar with `.form-inline`.
+Place various form controls and components within a navbar with `.row`.
 
 {{< example >}}
 <nav class="navbar navbar-light bg-light">
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  <form class="row g-2">
+    <div class="col-md-auto">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    </div>
+
+    <div class="col-md-auto">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </div>
   </form>
 </nav>
 {{< /example >}}
@@ -214,9 +223,14 @@ Immediate children elements in `.navbar` use flex layout and will default to `ju
 {{< example >}}
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand">Navbar</a>
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  <form class="row g-2">
+    <div class="col-md-auto">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    </div>
+
+    <div class="col-md-auto">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </div>
   </form>
 </nav>
 {{< /example >}}
@@ -225,7 +239,7 @@ Input groups work, too:
 
 {{< example >}}
 <nav class="navbar navbar-light bg-light">
-  <form class="form-inline">
+  <form>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">@</span>
@@ -240,7 +254,7 @@ Various buttons are supported as part of these navbar forms, too. This is also a
 
 {{< example >}}
 <nav class="navbar navbar-light bg-light">
-  <form class="form-inline">
+  <form>
     <button class="btn btn-outline-success" type="button">Main button</button>
     <button class="btn btn-sm btn-outline-secondary" type="button">Smaller button</button>
   </form>
@@ -312,9 +326,14 @@ Theming the navbar has never been easier thanks to the combination of theming cl
           <a class="nav-link" href="#">About</a>
         </li>
       </ul>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+
+      <form class="row g-2">
+        <div class="col-md-auto">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </div>
+        <div class="col-md-auto">
+          <button class="btn btn-outline-info" type="submit">Search</button>
+        </div>
       </form>
     </div>
   </nav>
@@ -340,9 +359,14 @@ Theming the navbar has never been easier thanks to the combination of theming cl
           <a class="nav-link" href="#">About</a>
         </li>
       </ul>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+
+      <form class="row g-2">
+        <div class="col-md-auto">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </div>
+        <div class="col-md-auto">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </div>
       </form>
     </div>
   </nav>
@@ -368,9 +392,14 @@ Theming the navbar has never been easier thanks to the combination of theming cl
           <a class="nav-link" href="#">About</a>
         </li>
       </ul>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+
+      <form class="row g-2">
+        <div class="col-md-auto">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </div>
+        <div class="col-md-auto">
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </div>
       </form>
     </div>
   </nav>
@@ -472,9 +501,13 @@ With no `.navbar-brand` shown in lowest breakpoint:
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form class="row g-2">
+      <div class="col-auto">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </div>
     </form>
   </div>
 </nav>
@@ -501,9 +534,13 @@ With a brand name shown on the left and toggler on the right:
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form class="row g-2">
+      <div class="col-auto">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </div>
     </form>
   </div>
 </nav>
@@ -530,9 +567,13 @@ With a toggler on the left and brand name on the right:
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form class="row g-2">
+      <div class="col-auto">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </div>
     </form>
   </div>
 </nav>
