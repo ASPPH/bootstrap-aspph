@@ -82,7 +82,6 @@
     "url": "https://github.com/twbs/bootstrap/issues"
   },
   "license": "MIT",
-  "dependencies": {},
   "peerDependencies": {
     "popper.js": "^1.15.0"
   },
