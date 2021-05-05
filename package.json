@@ -86,7 +86,7 @@
     "popper.js": "^1.15.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.4",
+    "@babel/cli": "^7.13.16",
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
@@ -107,7 +107,7 @@
     "hugo-bin": "^0.46.3",
     "ip": "^1.1.5",
     "jasmine-core": "^3.5.0",
-    "karma": "^4.3.0",
+    "karma": "^6.0.4",
     "karma-browserstack-launcher": "1.4.0",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.0",
