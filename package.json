@@ -163,5 +163,8 @@
     "peerDependencies": {
       "popper.js": "^1.15.0"
     }
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
