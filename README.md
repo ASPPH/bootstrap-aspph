@@ -1,3 +1,7 @@
+## ASPPH notes
+This repo was an experiment exploring the idea of keeping our own ASPPH version of bootstrap maintained in order to keep things consistent across apps. It's not used and now way out of maintenance so it will be archived. -RAP 09/03/2021
+
+
 <p align="center">
   <a href="https://getbootstrap.com/">
     <img src="https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg" alt="Bootstrap logo" width="72" height="72">
